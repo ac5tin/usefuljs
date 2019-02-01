@@ -117,6 +117,7 @@ const form_validate = (value,type,min=null,max=null,length=6)=>{
 /** detailed input values validation (more verbose version of form_validate) */
 const form_validate_v = (value,type,min=null,max=null,length=6)=>{
     value = value.trim();
+	//TODO: 
 }
 
 
