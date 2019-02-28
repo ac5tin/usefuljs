@@ -1,4 +1,4 @@
-/* dependencies: 
+/* dependencies: jquery
  * =====================================
  */
 
@@ -16,6 +16,23 @@ function removeA(arr){
         }
     }
     return arr;
+}
+
+
+/*
+ * @param {array} arr array
+ * @returns {any} last element in array
+ */
+const arr_last = arr => arr[arr.length - 1];
+
+/** adds element to beginning of array and returns the array
+ * @param {element} value 
+ * @param {array} array
+ */
+const prepend = (value, array)=>{
+    let newArray = array.slice();
+    newArray.unshift(value);
+    return newArray;
 }
 
 
@@ -55,13 +72,19 @@ const replaceAll = (str, find, replace)=>{
 
 
 /** return distance from bottom of page 
+ * @param {element} element html div element
  * @returns {number}
 */
-const getDistFromBottom = ()=>{
-    const scrollPosition = window.pageYOffset;
-    const windowSize = window.innerHeight;
-    const bodyHeight = document.body.offsetHeight;
-    return Math.max(bodyHeight - (scrollPosition + windowSize), 0);
+const getDistFromBottom = (element=null) =>{
+    if(element){
+        return element.scrollTop  - (element.scrollHeight - element.offsetHeight);
+    }else{
+        const scrollPosition = window.pageYOffset;
+        const windowSize = window.innerHeight;
+        const bodyHeight = document.body.offsetHeight;
+        return Math.max(bodyHeight - (scrollPosition + windowSize), 0);
+    }
+    
 }
 
 
@@ -117,7 +140,6 @@ const form_validate = (value,type,min=null,max=null,length=6)=>{
 /** detailed input values validation (more verbose version of form_validate) */
 const form_validate_v = (value,type,min=null,max=null,length=6)=>{
     value = value.trim();
-	//TODO: 
 }
 
 
@@ -141,6 +163,32 @@ const validateEmail = email => {
 const isInt = value =>{
     let x;
     return isNaN(value) ? !1 : (x = parseFloat(value), (0 | x) === x);
+}
+
+
+/** send an ajax request to api endpoint
+ * @param {string} api_endpoint
+ * @param {Object} param
+ * @returns {Object} response json
+ */
+const fetch_data = async(api_endpoint,param = {})=>{
+    try{
+        const res = await $.get(api_endpoint,param);
+        return await res;
+    }catch(err){console.log(err);return null}
+}
+
+
+/** send an ajax post request to api endpoint (requires jQuery)
+ * @param {string} api_endpoint
+ * @param {Object} param
+ * @returns {Object} response json
+ */
+const post_data = async(api_endpoint,param = {})=>{
+    try{
+        const res = await $.post(api_endpoint,param);
+        return await res;
+    }catch(err){console.log(err);return null}
 }
 
 
@@ -301,7 +349,19 @@ const shortuid = ()=> {
     return firstPart + secondPart;
 }
 
-
+/** find matching values in 2 different arrays
+ * @param {array} array0
+ * @param {array} array1
+ */
+const matching_array = (ar0,ar1)=>{
+    let retMe = []; //return this array at the end
+    ar0.forEach(x=>{
+        if(ar1.includes(x)){
+            retMe.push(x);
+        }
+    });
+    return retMe;
+}
 
 
 
@@ -372,4 +432,140 @@ const obj_prop_rename = (obj,oldName,newName)=>{
 }
 
 
+
+
+
+/**
+ * filters object
+ * @param {object} obj 
+ * @param {function} predicate 
+ * @returns {object} 
+ */
+const obj_filter = (obj,predicate)=>{
+    const list = {};
+    Object.keys(obj).forEach(each => {
+        const o = obj[each];
+        if(predicate(o))list[each] = o;
+    });
+    return list;
+}
+
+
+/**
+ * filters object by key
+ * @param {object} obj 
+ * @param {function} predicate 
+ * @returns {object} 
+ */
+const obj_key_filter = (obj,predicate)=>{
+	const list = {};
+	Object.keys(obj).forEach(each =>{
+		if(predicate(each))list[each] = obj[each];
+	});
+	return list;
+}
+
+
+
+
+/** ajax submit request using xhr API 
+ * @param {Object} arguments
+ * @param {string} arguments.method GET or POST
+ * @param {string} arguments.url url
+ * @param {Object} arguments.data data
+ */
+const ajaxhr = async({method='GET',url=null,data=null})=>{
+    try{
+        method = method.toUpperCase();
+        const reqBody = {
+            method: method.toUpperCase()
+        };
+        if(method === "POST"){
+            reqBody.body = JSON.stringify(data);
+            reqBody.headers = {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            };
+        }
+        if(method === "GET" && data){
+            // append each item to end of url
+            url += '?';
+            //Object.keys(data).forEach(key => url += key+'='+data[key]+'&');
+
+            let props_appended = 0;
+            const all_props_length = Object.keys(data).length;
+            Object.keys(data).forEach(key => {
+                url += key+'='+data[key];
+                props_appended ++;
+                if(props_appended < all_props_length)url+= '&';
+            })
+        }
+
+        // create new xhr instance
+		return new Promise((resolve,reject)=>{
+			const xhr = new XMLHttpRequest();
+			xhr.open(method,url,true);
+			xhr.setRequestHeader("Content-Type","application/json");
+			
+			/*
+			xhr.onreadystatechange = ()=>{
+				// Only run if the request is complete
+				if (xhr.readyState !== 4) return;
+				// Process our return data
+				if (xhr.status >= 200 && xhr.status < 300) {
+					// What do when the request is successful
+					return resolve(JSON.parse(xhr.responseText));
+				} else {
+					// What to do when the request has failed
+					return reject(JSON.parse(xhr.response));
+				}
+			
+			};
+			*/
+			xhr.onload = ()=>{
+				if (this.status >= 200 && this.status < 300){
+					resolve(JSON.parse(xhr.responseText));
+				}else{
+					reject(JSON.parse(xhr.responseText));
+				}
+			}
+			
+			xhr.onerror = ()=> reject(JSON.parse(xhr.responseText));
+			
+			
+			
+			xhr.send(reqBody.body);
+		})
+        
+
+    }catch(err){console.log(err);return {result:'error'}}
+}
+
+
+
+/** uppercase first letter 
+  * @param {string} text input string
+  * @returns {string}
+*/
+const ucfirst = text =>(
+    text.charAt(0).toUpperCase() + text.substring(1)
+)
+
+
+
+
+
+/** converts array of objects into big object
+ * @param {array} arr input array
+ * @param {string} keyname key name of each object
+ * @returns {object}
+ */
+arr2Obj = (arr,keyname) =>{
+	const retme = {};
+	arr.forEach(a => {
+		retme[a[keyname]] = {...a};
+		delete retme[a[keyname]][keyname]
+	});
+	return retme;
+}
 
