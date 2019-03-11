@@ -69,6 +69,14 @@ Ajax submit request using native fetch API
 ajax({url='/api/test'})
 ```
 
+
+## ajaxhr
+Ajax submit request using xhr API
+```javascript
+ajaxhr({url='/api/test'})
+```
+
+
 ## time_in_minutes
 String time to minutes in int format
 ```javascript

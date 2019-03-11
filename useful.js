@@ -569,3 +569,10 @@ arr2Obj = (arr,keyname) =>{
 	return retme;
 }
 
+
+/** pause 
+  * @param {number} milliseconds
+*/
+const sleep = milliseconds => {
+  return new Promise(resolve => setTimeout(resolve, milliseconds))
+}
