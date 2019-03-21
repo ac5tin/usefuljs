@@ -2,6 +2,13 @@
 ### List of functions that might be useful
 ### Some of them are copied from others
 
+### install
+```
+yarn add usefuljs --use-pnp 
+```
+
+
+
 
 ## removeA
 returns item from array by value
