@@ -204,7 +204,7 @@ const ajax = async({method='GET',url=null,data=null}) =>{
         const reqBody = {
             method: method.toUpperCase()
         };
-        ifif(method === "POST" || method === "PUT"){
+        if(method === "POST" || method === "PUT"){
             reqBody.body = JSON.stringify(data);
             reqBody.headers = {
                 'Accept': 'application/json',
@@ -583,4 +583,14 @@ arr2Obj = (arr,keyname) =>{
 */
 const sleep = milliseconds => {
   return new Promise(resolve => setTimeout(resolve, milliseconds))
+}
+
+
+
+module.exports = {
+    removeA, arr_last, prepend, array_push, array_remove,
+    replaceAll, getDistFromBottom, obj2arr, form_validate, validateEmail,
+    isInt, ajax, time_in_minutes, arr_chunk, asyncForEach, obj_sort,
+    arr_rm, uuidv4, shortuid, matching_array, obj_prop_rename, obj_filter,
+    obj_key_filter, ajaxhr, ucfirst, arr2Obj, sleep
 }
