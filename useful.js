@@ -584,3 +584,27 @@ arr2Obj = (arr,keyname) =>{
 const sleep = milliseconds => {
   return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
+
+
+
+
+/** filter out empty NaN values from array 
+ * @param { array } input_array
+ * @returns array
+*/
+const f_arr = test_array =>{
+    let index = -1;
+    const arr_length = test_array ? test_array.length : 0;
+    let resIndex = -1;
+    const result = [];
+
+    while (++index < arr_length) {
+        const value = test_array[index];
+
+        if (value) {
+            result[++resIndex] = value;
+        }
+    }
+
+    return result;
+}

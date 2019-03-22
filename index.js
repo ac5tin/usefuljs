@@ -481,12 +481,31 @@ const sleep = milliseconds => {
   return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
 
+/** filter out empty NaN values from array 
+ * @param { array } input_array
+ * @returns array
+*/
+const f_arr = test_array =>{
+    let index = -1;
+    const arr_length = test_array ? test_array.length : 0;
+    let resIndex = -1;
+    const result = [];
 
+    while (++index < arr_length) {
+        const value = test_array[index];
+
+        if (value) {
+            result[++resIndex] = value;
+        }
+    }
+
+    return result;
+}
 
 module.exports = {
     removeA, arr_last, prepend, array_push, array_remove,
     replaceAll, getDistFromBottom, obj2arr, form_validate, validateEmail,
     isInt, ajax, time_in_minutes, arr_chunk, asyncForEach, obj_sort,
     arr_rm, uuidv4, shortuid, matching_array, obj_prop_rename, obj_filter,
-    obj_key_filter, ajaxhr, ucfirst, arr2Obj, sleep
+    obj_key_filter, ajaxhr, ucfirst, arr2Obj, sleep , f_arr
 }
