@@ -1,7 +1,3 @@
-/* dependencies: jquery
- * =====================================
- */
-
 /** removes item from array by value
  * @param {array} arr
  * @param {element} element
@@ -136,16 +132,6 @@ const form_validate = (value,type,min=null,max=null,length=6)=>{
 }
 
 
-
-/** detailed input values validation (more verbose version of form_validate) */
-const form_validate_v = (value,type,min=null,max=null,length=6)=>{
-    value = value.trim();
-}
-
-
-
-
-
 /** validates email
  * @param {string} email
  * @returns {boolean}
@@ -165,31 +151,6 @@ const isInt = value =>{
     return isNaN(value) ? !1 : (x = parseFloat(value), (0 | x) === x);
 }
 
-
-/** send an ajax request to api endpoint
- * @param {string} api_endpoint
- * @param {Object} param
- * @returns {Object} response json
- */
-const fetch_data = async(api_endpoint,param = {})=>{
-    try{
-        const res = await $.get(api_endpoint,param);
-        return await res;
-    }catch(err){console.log(err);return null}
-}
-
-
-/** send an ajax post request to api endpoint (requires jQuery)
- * @param {string} api_endpoint
- * @param {Object} param
- * @returns {Object} response json
- */
-const post_data = async(api_endpoint,param = {})=>{
-    try{
-        const res = await $.post(api_endpoint,param);
-        return await res;
-    }catch(err){console.log(err);return null}
-}
 
 
 /** ajax submit request using native fetch API 
@@ -257,24 +218,6 @@ const time_in_minutes = time =>{
     return m;
 }
 
-
-
-/** generate download file and start download
- * @param {string} filename
- * @param {string} text file content
- */
-const download = (filename, text)=>{
-    const element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-    element.setAttribute('download', filename);
-  
-    element.style.display = 'none';
-    document.body.appendChild(element);
-  
-    element.click();
-  
-    document.body.removeChild(element);
-  }
 
 
 /** split array into chunks of smaller arrays
@@ -374,53 +317,6 @@ const matching_array = (ar0,ar1)=>{
 
 
 
-/** file reader with callback
- * @param {file} file
- * @param {function} onLoadCallback
- */
-const readFile =(file, onLoadCallback)=>{
-    const reader = new FileReader();
-    reader.onload = onLoadCallback;
-    reader.readAsText(file);
-}
-
-
-
-
-/** returns file content as text
- * @param {file} inputFile
- * @returns {string} text content
- */
-const readFile_content = inputFile => {
-    const temporaryFileReader = new FileReader();
-  
-    return new Promise((resolve, reject) => {
-        temporaryFileReader.onerror = () => {
-            temporaryFileReader.abort();
-            reject(new DOMException("Problem parsing input file."));
-        };
-  
-        temporaryFileReader.onload = () => {
-            resolve(temporaryFileReader.result);
-        };
-        temporaryFileReader.readAsText(inputFile);
-    });
-};
-
-
-/** returns array of siblings of an element 
- * @param {element} elem
- * @returns {array} siblings
-*/
-const getSiblings = elem=> {
-	let siblings = [];
-	let sibling = elem.parentNode.firstChild;
-	for (; sibling; sibling = sibling.nextSibling) {
-		if (sibling.nodeType !== 1 || sibling === elem) continue;
-		siblings.push(sibling);
-	}
-	return siblings;
-};
 
 
 
