@@ -1,4 +1,4 @@
-/* dependencies: jquery
+/* dependencies: 
  * =====================================
  */
 
@@ -165,31 +165,6 @@ const isInt = value =>{
     return isNaN(value) ? !1 : (x = parseFloat(value), (0 | x) === x);
 }
 
-
-/** send an ajax request to api endpoint
- * @param {string} api_endpoint
- * @param {Object} param
- * @returns {Object} response json
- */
-const fetch_data = async(api_endpoint,param = {})=>{
-    try{
-        const res = await $.get(api_endpoint,param);
-        return await res;
-    }catch(err){console.log(err);return null}
-}
-
-
-/** send an ajax post request to api endpoint (requires jQuery)
- * @param {string} api_endpoint
- * @param {Object} param
- * @returns {Object} response json
- */
-const post_data = async(api_endpoint,param = {})=>{
-    try{
-        const res = await $.post(api_endpoint,param);
-        return await res;
-    }catch(err){console.log(err);return null}
-}
 
 
 /** ajax submit request using native fetch API 
