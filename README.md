@@ -7,161 +7,188 @@
 yarn add usefuljs --use-pnp 
 ```
 
-
-
-
-## removeA
-returns item from array by value
-
-## array_push 
-Only push to array if value doesn't already exist
+### import
 ```javascript
-array_push(arr,el);
-```
-
-
-## array_remove
-Removes an element from array
-```javascript
-array_remove(array, element)
-```
-
-
-## replaceAll
-String replace all
-```javascript
-replaceAll(str, find, replace)
-```
-
-
-
-## getDistFromBottom
-Returns distance from bottom of page
-```javascript
-getDistFromBottom ()
-```
-
-
-## obj2arr
-Converts object into array
-```javascript
-obj2arr(obj)
-```
-
-
-## form_validate
-Validates input values and returns a boolean value
-```javascript
-form_validate('abc','text')
-```
-
-
-## validateEmail
-validates email
-```javascript
-validateEmail('abc@foo.bar')
-```
-
-
-## isInt
-Validate integer
-```javascript
-isInt(foobar)
+import { ajax , arr_last } from 'usefuljs'
 ```
 
 
 ## ajax
-Ajax submit request using native fetch API
-```javascript
-ajax({url='/api/test'})
+Perform ajax request using the native fetch API
+### parameters
 ```
-
+method : default = GET
+url
+data : (if using post or put method)
+```
+### get request
+```javascript
+ajax({url:'/api/users/list'}).then(res => console.log(res));
+```
+### post request
+```javascript
+ajax({
+        method:'POST',
+        url:'/api/users/create',
+        data:{ username:'austin',password:'abcdef'}
+    }).then(res => console.log(res));
+```
 
 ## ajaxhr
-Ajax submit request using xhr API
+Same as ajax but uses xhr API instead of fetch API
+
+
+
+## arr_last
+Returns last element from an array
 ```javascript
-ajaxhr({url='/api/test'})
+arr_last(array)
+```
+
+## array_push
+Similar to the php array_push method, it adds new element to array (if value doesn't exist in array)
+```javascript
+array_push(arr,"foo")
 ```
 
 
-## time_in_minutes
-String time to minutes in int format
+
+## prepend
+Add an element to the beginning of an array
 ```javascript
-time_in_minutes(time)
+prepend("foo",array)
 ```
 
 
-## download
-generate download file and start download 
+## replaceAll
+Replaces all matches in a string
 ```javascript
-download(filename,content)
+replaceAll(string1,'find','replace')
 ```
 
+
+## getDistFromBottom
+Get distance from bottom of the page
+```javascript
+getDistFromBottom()
+```
+
+
+## obj2arr
+Object into array
+```javascript
+const a = {a:"123",b:"456",c:"789"};
+obj2arr(a); // <-- this returns : ["123","456","789"]
+```
+
+
+## isInt
+Is the value an integer (parses string too)
+```javascript
+isInt("1") // true
+isInt(1)  // true
+isInt("1cd") // false
+```
 
 ## arr_chunk
-splits array into chunks of smaller arrays
+split array into chunks of smaller arrays
 ```javascript
-arr_chunk(arr,length)
+arr_chunk([1,2,3,4,5,6],2); // <-- returns 3 arrays : [1,2] , [3,4] , [5,6]
+arr_chunk([1,2,3,4,5,6],3); // <-- returns 2 arrays: [1,2,3] , [4,5,6]
 ```
 
-
 ## asyncForEach
-async version of forEach
+Async version of foreach
 ```javascript
-asyncForEach(arr,callback)
+await asyncForEach(arr, x => console.log(x))
 ```
 
 
 ## obj_sort
-INFO: Pass this as a parameter to array.sort()
-```javascript
-arr.sort(obj_sort(sort_method_name))
+sort array of object by object property value
+* Supply this as the parameter of the array.sort() function *
+
+### parameters
+```
+name : key name
+length : sort by length   boolean (default = false)
+reverse: boolean (default = false)
 ```
 
-## arr_rm
-Remove element from array (similar to array_remove but instead doesn't return result)
 ```javascript
-arr_rm(arr,element)
+const a = [{number:1}, {number:2}];
+a.sort(obj_sort('number',false,true)); // <- returns [{number:2}, {number:1}]
 ```
 
 
 ## uuidv4
 generates uuidv4
 ```javascript
-uuidv4()
+uuidv4();
+```
+
+
+## unique_id
+generates a uid
+```javascript
+unique_id()
 ```
 
 
 ## shortuid
-generate short uid
+generates a short uid
 ```javascript
-shortuid();
-```
-
-## readFile
-File Reader with callback
-```javascript
-readFile(file, callback)
+shortuid()
 ```
 
 
-## readFile_content
-read file content as text
+## matching_array
+Find all matching values in 2 arrays
 ```javascript
-readFile_content(file);
-```
+const a = [1,2,3];
+const b = [4,5,6];
+const c = [1,2,3];
 
-
-
-## getSiblings
-get array of siblings of an element
-```javascript
-getSiblings(element)
+matching_array(a,b); // returns []
+matching_array(a,c); // returns [1,2,3]
 ```
 
 
 ## obj_prop_rename
-Renames an object property
+Change property name of an object
 ```javascript
-obj_prop_rename(obj,oldname,newname)
+obj_prop_rename(obj,'old','new')
+```
+
+
+## obj_filter
+Filters an object
+```javascript
+obj_filter(obj, x => x === 'abc');
+```
+
+## obj_key_filter
+Filters an object by key name
+```javascript
+obj_key_filter(obj, x => x === 'name');
+```
+
+
+## ucfirst
+Upper case first letter
+```javascript
+ucfirst('foobar'); // returns Foobar
+```
+
+## sleep
+Pauses
+```javascript
+sleep(1000); // <-- sleep for 1000 miliseconds
+```
+
+
+## f_arr
+Filter out empty/NaN elements in array
+```javascript
+f_arr(['a',NaN,22,null]); // returns ["a", 22]
 ```

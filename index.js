@@ -37,7 +37,7 @@ const prepend = (value, array)=>{
  * @param {element} element
  */
 const array_push = (arr,el)=>{
-    if(!arr.includes(el) && el){
+    if(!arr.includes(el)){
         arr.push(el);
     }
 }
@@ -464,7 +464,7 @@ const ucfirst = text =>(
  * @param {string} keyname key name of each object
  * @returns {object}
  */
-arr2Obj = (arr,keyname) =>{
+const arr2Obj = (arr,keyname) =>{
 	const retme = {};
 	arr.forEach(a => {
 		retme[a[keyname]] = {...a};

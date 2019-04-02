@@ -41,7 +41,7 @@ const prepend = (value, array)=>{
  * @param {element} element
  */
 const array_push = (arr,el)=>{
-    if(!arr.includes(el) && el){
+    if(!arr.includes(el)){
         arr.push(el);
     }
 }
