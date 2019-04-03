@@ -158,8 +158,9 @@ const isInt = value =>{
  * @param {string} arguments.method GET or POST
  * @param {string} arguments.url url
  * @param {Object} arguments.data data
+ * @param {Object} arguments.signal
  */
-const ajax = async({method='GET',url=null,data=null}) =>{
+const ajax = async({method='GET',url=null,data=null,signal=null}) =>{
     try{
 		method = method.toUpperCase();
         const reqBody = {
@@ -185,7 +186,12 @@ const ajax = async({method='GET',url=null,data=null}) =>{
                 if(props_appended < all_props_length)url+= '&';
             })
         }
-
+        
+        
+        // if abort signal present, attach it to body
+        if(signal){
+            reqBody.signal = signal
+        }
         const res = await fetch(url,reqBody);
     
         const content = await res.json();

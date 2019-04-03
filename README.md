@@ -20,6 +20,7 @@ Perform ajax request using the native fetch API
 method : default = GET
 url
 data : (if using post or put method)
+signal : AbortController().signal (optional)
 ```
 ### get request
 ```javascript
@@ -35,7 +36,7 @@ ajax({
 ```
 
 ## ajaxhr
-Same as ajax but uses xhr API instead of fetch API
+Same as ajax but uses xhr API instead of fetch API + doesn't have the signal parameter
 
 
 
