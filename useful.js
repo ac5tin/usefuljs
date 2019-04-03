@@ -210,7 +210,7 @@ const ajax = async({method='GET',url=null,data=null,signal=null}) =>{
     
         const content = await res.json();
         return content;
-    }catch(err){console.log(err);return {result:'error'}}
+    }catch(err){console.log(err);throw err}
     
 }
 
@@ -527,7 +527,7 @@ const ajaxhr = async({method='GET',url=null,data=null})=>{
 		})
         
 
-    }catch(err){console.log(err);return {result:'error'}}
+    }catch(err){console.log(err);throw err}
 }
 
 
