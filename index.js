@@ -532,5 +532,5 @@ module.exports = {
     replaceAll, getDistFromBottom, obj2arr, form_validate, validateEmail,
     isInt, ajax, time_in_minutes, arr_chunk, asyncForEach, obj_sort,
     arr_rm, uuidv4, shortuid, matching_array, obj_prop_rename, obj_filter,
-    obj_key_filter, ajaxhr, ucfirst, arr2Obj, sleep , f_arr
+    obj_key_filter, ajaxhr, ucfirst, arr2Obj, sleep , f_arr , arr_rmi
 }
