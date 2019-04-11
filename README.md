@@ -46,6 +46,37 @@ Returns last element from an array
 arr_last(array)
 ```
 
+
+## arr_rm
+Removes an element from an array (by value)
+```javascript
+arr_rm(arr,elem)
+```
+### optional 3rd parameter (mutate)
+By default mutate is set to true
+If set to false, array will be returned instead of mutating the original array
+```javascript
+arr_rm(arr,elem,false)
+```
+
+
+
+## arr_rmi
+Removes an element from an array (by index)
+```javascript
+arr_rm(arr,index)
+```
+### optional 3rd parameter (mutate)
+By default mutate is set to true
+If set to false, array will be returned instead of mutating the original array
+```javascript
+arr_rm(arr,index,false)
+```
+
+
+
+
+
 ## array_push
 Similar to the php array_push method, it adds new element to array (if value doesn't exist in array)
 ```javascript

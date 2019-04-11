@@ -304,10 +304,27 @@ const obj_sort = (name,length=false,reverse=false) =>{
 /** remove an element from array
  * @param {array} arr
  * @param {element} element
+ * @param {boolean} mutate (true by default)
+ * @return {array} if mutate is false
  */
-const arr_rm = (arr,element) =>{
+const arr_rm = (arr,element,mutate=true) =>{
+    if(!mutate)return arr.filter(x => x!== element);
     arr.splice(arr.indexOf(element),1);
 }
+
+
+
+/** remove an element from array by index
+ * @param {array} arr
+ * @param {number} index
+ * @param {mutate} mutate (true by default)
+ * @return {array} if mutate is false
+ */
+const arr_rmi = (arr,index=0,mutate=true)=>{
+    if(!mutate)return arr.slice(0, index).concat(arr.slice(index+1, arr.length));
+    arr.splice(index,1);
+}
+
 
 /** generates unique id 
  * @returns {string} unique id
