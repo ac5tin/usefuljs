@@ -173,8 +173,9 @@ const isInt = value =>{
  * @param {string} arguments.url url
  * @param {Object} arguments.data data
  * @param {Object} arguments.signal
+ * @param {object} arguments.headers additional headers
  */
-const ajax = async({method='GET',url=null,data=null,signal=null}) =>{
+const ajax = async({method='GET',url=null,data=null,signal=null,headers={} }) =>{
     try{
 		method = method.toUpperCase();
         const reqBody = {
@@ -200,6 +201,10 @@ const ajax = async({method='GET',url=null,data=null,signal=null}) =>{
                 if(props_appended < all_props_length)url+= '&';
             })
         }
+        
+        
+        // additonal headers
+        reqBody.headers = {...reqBody.headers,...headers}
         
         
         // if abort signal present, attach it to body
@@ -478,8 +483,9 @@ const obj_key_filter = (obj,predicate)=>{
  * @param {string} arguments.method GET or POST
  * @param {string} arguments.url url
  * @param {Object} arguments.data data
+ * @param {Object} arguments.headers additonal headers
  */
-const ajaxhr = async({method='GET',url=null,data=null})=>{
+const ajaxhr = async({method='GET',url=null,data=null,headers={} })=>{
     try{
 		
         method = method.toUpperCase();
@@ -506,12 +512,19 @@ const ajaxhr = async({method='GET',url=null,data=null})=>{
                 if(props_appended < all_props_length)url+= '&';
             })
         }
+        
+        // additonal headers
+        reqBody.headers = {...reqBody.headers,...headers}
 
         // create new xhr instance
 		return new Promise((resolve,reject)=>{
 			const xhr = new XMLHttpRequest();
 			xhr.open(method,url,true);
-			xhr.setRequestHeader("Content-Type","application/json");
+            
+            for(h of Object.keys(reqBody.headers)){
+                xhr.setRequestHeader(h,reqBody.headers[h]);
+            }
+			//xhr.setRequestHeader("Content-Type","application/json");
 			
 			/*
 			xhr.onreadystatechange = ()=>{
