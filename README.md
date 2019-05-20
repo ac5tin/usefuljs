@@ -41,7 +41,7 @@ ajax({
 ajax({
     method:'post',
     url:'/api/verify',
-    heades: {api-key: "abc123"},
+    heades: {token: "abc123"},
     data: { username: "testuser"}
 })
 ```
