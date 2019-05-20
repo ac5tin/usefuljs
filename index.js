@@ -27,6 +27,14 @@ const contains_kw = expression =>{
  */
 
 
+/** escape double quotes in string
+ * @param {string} str target string
+ * returns {string}
+ * source : (https://gist.github.com/getify/3667624)
+ */
+const escape_dq = str => str.replace(/\\([\s\S])|(")/g,"\\$1$2"); // thanks @slevithan!
+
+
 
 /*
  * @param {array} arr array
@@ -558,5 +566,5 @@ module.exports = {
     replaceAll, getDistFromBottom, obj2arr, form_validate, validateEmail,
     isInt, ajax, time_in_minutes, arr_chunk, asyncForEach, obj_sort,
     arr_rm, uuidv4, shortuid, matching_array, obj_prop_rename, obj_filter,
-    obj_key_filter, ajaxhr, ucfirst, arr2Obj, sleep , f_arr , arr_rmi
+    obj_key_filter, ajaxhr, ucfirst, arr2Obj, sleep , f_arr , arr_rmi,escape_dq
 }
