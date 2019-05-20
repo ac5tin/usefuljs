@@ -21,6 +21,7 @@ method : default = GET
 url
 data : (if using post or put method)
 signal : AbortController().signal (optional)
+headers : additional headers in Object format (optional)
 ```
 ### get request
 ```javascript
@@ -34,6 +35,27 @@ ajax({
         data:{ username:'austin',password:'abcdef'}
     }).then(res => console.log(res));
 ```
+
+### additional headers
+``` javascript
+ajax({
+    method:'post',
+    url:'/api/verify',
+    heades: {api-key: "abc123"},
+    data: { username: "testuser"}
+})
+```
+
+### abort controller signal
+```javascript
+const controller = new AbortController();
+const signal = this.controller.signal;
+ajax({url:'/api/test',signal});
+
+// -- when u want to abort the ajax requet --
+controller.abort();
+```
+
 
 ## ajaxhr
 Same as ajax but uses xhr API instead of fetch API + doesn't have the signal parameter
@@ -72,9 +94,6 @@ If set to false, array will be returned instead of mutating the original array
 ```javascript
 arr_rm(arr,index,false)
 ```
-
-
-
 
 
 ## array_push
@@ -223,4 +242,12 @@ sleep(1000); // <-- sleep for 1000 miliseconds
 Filter out empty/NaN elements in array
 ```javascript
 f_arr(['a',NaN,22,null]); // returns ["a", 22]
+```
+
+
+
+## escape_dq
+Escape Double Quotes
+```javascript
+const newstring = escape_dq(oldstring);
 ```
