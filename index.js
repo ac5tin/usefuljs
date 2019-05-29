@@ -181,8 +181,9 @@ const isInt = value =>{
  * @param {Object} arguments.data data
  * @param {Object} arguments.signal
  * @param {object} arguments.headers additional headers
+ * @param {boolean arguments.cors enable CORS (default is unset)
  */
-const ajax = async({method='GET',url=null,data=null,signal=null,headers={} }) =>{
+const ajax = async({method='GET',url=null,data=null,signal=null,headers={}, cors=null }) =>{
     try{
 		method = method.toUpperCase();
         const reqBody = {
@@ -213,6 +214,8 @@ const ajax = async({method='GET',url=null,data=null,signal=null,headers={} }) =>
         // additonal headers
         reqBody.headers = {...reqBody.headers,...headers}
         
+        // cors
+        if(cors !== null)reqBody.mode = cors ? 'cors' : 'no-cors';
         
         // if abort signal present, attach it to body
         if(signal){
