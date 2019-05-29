@@ -32,7 +32,7 @@ const contains_kw = expression =>{
  * returns {string}
  * source : (https://gist.github.com/getify/3667624)
  */
-const escape_dq = str => str.replace(/\\([\s\S])|(")/g,"\\$1$2"); // thanks @slevithan!
+const escape_dq = str => str.replace(/\\([\s\S])|("|')/g,"\\$1$2"); // thanks @slevithan!
 
 
 
