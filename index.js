@@ -53,6 +53,17 @@ const prepend = (value, array)=>{
 }
 
 
+/** convert bytes to human readable sizes
+ * @param {number} a bytes
+ * @param {number} b number of decimals
+ * @return {string} 
+ * source: https://stackoverflow.com/questions/15900485/correct-way-to-convert-size-in-bytes-to-kb-mb-gb-in-javascript
+ */
+const formatBytes = (a,b) =>{if(0==a)return"0 Bytes";var c=1024,d=b||2,e=["Bytes","KB","MB","GB","TB","PB","EB","ZB","YB"],f=Math.floor(Math.log(a)/Math.log(c));return parseFloat((a/Math.pow(c,f)).toFixed(d))+" "+e[f]};
+
+
+
+
 /** only push to array if value doesn't exist already
  * @param {array} array
  * @param {element} element
@@ -569,5 +580,6 @@ module.exports = {
     replaceAll, getDistFromBottom, obj2arr, form_validate, validateEmail,
     isInt, ajax, time_in_minutes, arr_chunk, asyncForEach, obj_sort,
     arr_rm, uuidv4, shortuid, matching_array, obj_prop_rename, obj_filter,
-    obj_key_filter, ajaxhr, ucfirst, arr2Obj, sleep , f_arr , arr_rmi,escape_dq
+    obj_key_filter, ajaxhr, ucfirst, arr2Obj, sleep , f_arr , arr_rmi,escape_dq, 
+    formatBytes
 }

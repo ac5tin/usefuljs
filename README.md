@@ -22,6 +22,7 @@ url
 data : (if using post or put method)
 signal : AbortController().signal (optional)
 headers : additional headers in Object format (optional)
+cors : enable or disabled cors (boolean) (optional)
 ```
 ### get request
 ```javascript
@@ -102,6 +103,20 @@ Similar to the php array_push method, it adds new element to array (if value doe
 array_push(arr,"foo")
 ```
 
+
+## formatBytes
+### Parameters
+```
+bytes (int)
+decimal places (int)
+```
+Bytes to human readable string
+```javascript
+formatBytes(1024)
+// returns "1 KB"
+formatBytes(3241234,3)
+// returns "3.091 MB"
+```
 
 
 ## prepend
