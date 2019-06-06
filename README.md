@@ -23,6 +23,7 @@ data : (if using post or put method)
 signal : AbortController().signal (optional)
 headers : additional headers in Object format (optional)
 cors : enable or disabled cors (boolean) (optional)
+formdata : form data object (optional),if set to true, data object is ignored
 ```
 ### get request
 ```javascript
