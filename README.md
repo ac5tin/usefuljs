@@ -120,6 +120,17 @@ formatBytes(3241234,3)
 ```
 
 
+
+## diffObj
+Delta/Difference between 2 objects
+```javascript
+let a = {x: 123,y:456,c:999}
+let b = {x: 123,y:222,c:888}
+diffObj(a,b)
+// returns [{y:456,c:999},{y:222,c:888}]
+```
+
+
 ## prepend
 Add an element to the beginning of an array
 ```javascript

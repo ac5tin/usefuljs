@@ -36,6 +36,95 @@ const escape_dq = str => str.replace(/\\([\s\S])|("|')/g,"\\$1$2"); // thanks @s
 
 
 
+/** difference(delta) between 2 objects
+  * @param {object} v1 first object
+  * @param {object} v2 second object
+  * return {array}
+  * source : (https://stackoverflow.com/questions/22108837/get-the-delta-of-two-javascript-objects) :by blackcatweb
+  */
+const diffObjs = (v1, v2)=>{
+
+    // return NULL when passed references to
+    // the same objects or matching scalar values
+    if (v1 === v2) {
+        return null;
+    }
+    let cloneIt = function(v) {
+        if (v == null || typeof v != 'object') {
+            return v;
+        }
+
+        let isArray = Array.isArray(v);
+
+        let obj = isArray ? [] : {};
+        if (!isArray) {
+            // handles function, etc
+            Object.assign({}, v);
+        }
+
+        for (let i in v) {
+            obj[i] = cloneIt(v[i]);
+        }
+
+        return obj;
+    }
+
+    // different types or array compared to non-array
+    if (typeof v1 != typeof v2 || Array.isArray(v1) != Array.isArray(v2)) {
+        return [cloneIt(v1), cloneIt(v2)];
+    }
+
+    // different scalars (no cloning needed)
+    if (typeof v1 != 'object' && v1 !== v2) {
+        return [v1, v2];
+    }
+
+    // one is null, the other isn't
+    // (if they were both null, the '===' comparison
+    // above would not have allowed us here)
+    if (v1 == null || v2 == null) {
+        return [cloneIt(v1), cloneIt(v2)]; 
+    }
+
+    // We have two objects or two arrays to compare.
+    let isArray = Array.isArray(v1);
+
+    let left = isArray ? [] : {};
+    let right = isArray ? [] : {};
+
+    for (let i in v1) {
+        if (!v2.hasOwnProperty(i)) {
+            left[i] = cloneIt(v1[i]);
+        } else {
+            let sub_diff = diffObjs(v1[i], v2[i]);
+            // copy the differences between the 
+            // two objects into the results.
+            // - If the object is array, use 'null'
+            //   to indicate the two corresponding elements
+            //   match.
+            //
+            // - If the object is not an array, copy only
+            //   the members that point to an unmatched
+            //   object.
+            if (isArray || sub_diff) { 
+                left[i] = sub_diff ? cloneIt(sub_diff[0]) : null;
+                right[i] = sub_diff ? cloneIt(sub_diff[1]) : null;
+            }
+        }
+    }
+
+    for (let i in v2) {
+        if (!v1.hasOwnProperty(i)) {
+            right[i] = cloneIt(v2[i]);
+        }
+    }
+
+    return [ left, right];
+};
+
+
+
+
 /*
  * @param {array} arr array
  * @returns {any} last element in array
@@ -59,7 +148,7 @@ const prepend = (value, array)=>{
  * @return {string} 
  * source: https://stackoverflow.com/questions/15900485/correct-way-to-convert-size-in-bytes-to-kb-mb-gb-in-javascript
  */
-const formatBytes = (a,b) =>{if(0==a)return"0 Bytes";var c=1024,d=b||2,e=["Bytes","KB","MB","GB","TB","PB","EB","ZB","YB"],f=Math.floor(Math.log(a)/Math.log(c));return parseFloat((a/Math.pow(c,f)).toFixed(d))+" "+e[f]};
+const formatBytes = (a,b) =>{if(0==a)return"0 Bytes";let c=1024,d=b||2,e=["Bytes","KB","MB","GB","TB","PB","EB","ZB","YB"],f=Math.floor(Math.log(a)/Math.log(c));return parseFloat((a/Math.pow(c,f)).toFixed(d))+" "+e[f]};
 
 
 
@@ -588,5 +677,5 @@ module.exports = {
     isInt, ajax, time_in_minutes, arr_chunk, asyncForEach, obj_sort,
     arr_rm, uuidv4, shortuid, matching_array, obj_prop_rename, obj_filter,
     obj_key_filter, ajaxhr, ucfirst, arr2Obj, sleep , f_arr , arr_rmi,escape_dq, 
-    formatBytes
+    formatBytes, diffObjs
 }
