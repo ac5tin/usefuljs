@@ -28,6 +28,23 @@ const escape_dq = str => str.replace(/\\([\s\S])|(")/g,"\\$1$2"); // thanks @sle
 
 
 
+/** escape HTML string
+ * @param {string} html_str HTML string
+ * reurns {string}
+ * source : {https://www.w3resource.com/javascript-exercises/javascript-string-exercise-19.php}
+ */
+const escape_HTML = html_str =>{
+    return html_str.replace(/[&<>"]/g, function (tag) {
+        const chars_to_replace = {
+            '&': '&',
+            '<': '<',
+            '>': '>',
+            '"': '"'
+        };
+        return chars_to_replace[tag] || tag;
+    });
+}
+
 
 /*
  * @param {array} arr array

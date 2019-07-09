@@ -278,3 +278,11 @@ Escape Double Quotes
 ```javascript
 const newstring = escape_dq(oldstring);
 ```
+
+
+
+## escape_HTML
+Escape HTML
+```javascript
+const escaped = escape_HTML(html);
+```

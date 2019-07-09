@@ -34,6 +34,22 @@ const contains_kw = expression =>{
  */
 const escape_dq = str => str.replace(/\\([\s\S])|("|')/g,"\\$1$2"); // thanks @slevithan!
 
+/** escape HTML string
+ * @param {string} html_str HTML string
+ * reurns {string}
+ * source : {https://www.w3resource.com/javascript-exercises/javascript-string-exercise-19.php}
+ */
+const escape_HTML = html_str =>{
+    return html_str.replace(/[&<>"]/g, function (tag) {
+        const chars_to_replace = {
+            '&': '&',
+            '<': '<',
+            '>': '>',
+            '"': '"'
+        };
+        return chars_to_replace[tag] || tag;
+    });
+}
 
 
 /** difference(delta) between 2 objects
@@ -677,5 +693,5 @@ module.exports = {
     isInt, ajax, time_in_minutes, arr_chunk, asyncForEach, obj_sort,
     arr_rm, uuidv4, shortuid, matching_array, obj_prop_rename, obj_filter,
     obj_key_filter, ajaxhr, ucfirst, arr2Obj, sleep , f_arr , arr_rmi,escape_dq, 
-    formatBytes, diffObjs
+    formatBytes, diffObjs,escape_HTML
 }
