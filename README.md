@@ -138,6 +138,14 @@ prepend("foo",array)
 ```
 
 
+## arr_dedup
+Deduplicates array 
+```javascript
+arr_dedup([2,3,4,4,2,5,5]);
+// returns [2, 3, 4, 5]
+```
+
+
 ## replaceAll
 Replaces all matches in a string
 ```javascript

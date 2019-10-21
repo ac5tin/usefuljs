@@ -180,7 +180,12 @@ function array_remove(array, element) {
 }
 
 
-
+/** removes array duplicates
+ * @param {array} array
+ * @return {array}
+ * source: (https://medium.com/dailyjs/how-to-remove-array-duplicates-in-es6-5daa8789641c)
+ */
+const arr_dedup = arr => arr.filter((item,index) => arr.indexOf(item) === index);
 
 /** replace all 
  * @param {string} str

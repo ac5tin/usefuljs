@@ -189,6 +189,13 @@ function array_remove(array, element) {
 }
 
 
+/** removes array duplicates
+ * @param {array} array
+ * @return {array}
+ * source: (https://medium.com/dailyjs/how-to-remove-array-duplicates-in-es6-5daa8789641c)
+ */
+const arr_dedup = arr => arr.filter((item,index) => arr.indexOf(item) === index);
+
 
 
 /** replace all 
@@ -693,5 +700,5 @@ module.exports = {
     isInt, ajax, time_in_minutes, arr_chunk, asyncForEach, obj_sort,
     arr_rm, uuidv4, shortuid, matching_array, obj_prop_rename, obj_filter,
     obj_key_filter, ajaxhr, ucfirst, arr2Obj, sleep , f_arr , arr_rmi,escape_dq, 
-    formatBytes, diffObjs,escape_HTML
+    formatBytes, diffObjs,escape_HTML,arr_dedup
 }
