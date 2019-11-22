@@ -294,6 +294,15 @@ const isInt = value =>{
     return isNaN(value) ? !1 : (x = parseFloat(value), (0 | x) === x);
 }
 
+/** check if string contains numbers only
+ * @param {string} value
+ * @returns {boolean}
+ * source: {https://stackoverflow.com/questions/1779013/check-if-string-contains-only-digits}
+ */
+const isNum = value => /^\d+$/.test(value);
+
+
+
 
 /** ajax submit request using native fetch API 
  * @param {Object} arguments

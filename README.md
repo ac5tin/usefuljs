@@ -176,6 +176,14 @@ isInt(1)  // true
 isInt("1cd") // false
 ```
 
+
+## isNum
+Does the string contain numbers only
+```javascript
+isNum("222") // true
+isNum("222/22")  //false
+```
+
 ## arr_chunk
 split array into chunks of smaller arrays
 ```javascript

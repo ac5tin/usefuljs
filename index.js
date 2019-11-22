@@ -296,6 +296,14 @@ const isInt = value =>{
 }
 
 
+/** check if string contains numbers only
+ * @param {string} value
+ * @returns {boolean}
+ * source: {https://stackoverflow.com/questions/1779013/check-if-string-contains-only-digits}
+ */
+const isNum = value => /^\d+$/.test(value);
+
+
 
 /** ajax submit request using native fetch API 
  * @param {Object} arguments
@@ -700,5 +708,5 @@ module.exports = {
     isInt, ajax, time_in_minutes, arr_chunk, asyncForEach, obj_sort,
     arr_rm, uuidv4, shortuid, matching_array, obj_prop_rename, obj_filter,
     obj_key_filter, ajaxhr, ucfirst, arr2Obj, sleep , f_arr , arr_rmi,escape_dq, 
-    formatBytes, diffObjs,escape_HTML,arr_dedup
+    formatBytes, diffObjs,escape_HTML,arr_dedup,isNum
 }
