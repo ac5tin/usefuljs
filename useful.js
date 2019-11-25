@@ -766,3 +766,49 @@ const f_arr = test_array =>{
 
     return result;
 }
+
+
+
+
+/** Random Colour hex code Generator
+ * @return { string }
+ * source: {https://gomakethings.com/how-to-generate-a-random-color-with-vanilla-js/}
+ */
+const colourgen = ()=> {
+	// The available hex options
+	const hex = ['a', 'b', 'c', 'd', 'e', 'f', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+	let colour = '#';
+    const shuffle = array => {
+        let currentIndex = array.length;
+        let temporaryValue, randomIndex;
+
+        // While there remain elements to shuffle...
+        while (0 !== currentIndex) {
+            // Pick a remaining element...
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+
+            // And swap it with the current element.
+            temporaryValue = array[currentIndex];
+            array[currentIndex] = array[randomIndex];
+            array[randomIndex] = temporaryValue;
+        }
+
+        return array;
+    }
+
+	// Create a six-digit hex colour
+	for (let i = 0; i < 6; i++) {
+
+		// Shuffle the hex values
+		shuffle(hex);
+
+		// Append first hex value to the string
+		colour += hex[0];
+
+	}
+
+	// Return the color string
+	return colour;
+
+};

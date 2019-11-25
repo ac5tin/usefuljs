@@ -302,3 +302,10 @@ Escape HTML
 ```javascript
 const escaped = escape_HTML(html);
 ```
+
+
+## colourgen
+Generate random colour hexcode
+```javascript
+const colour = colourgen();
+```
