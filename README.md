@@ -9,7 +9,14 @@ yarn add usefuljs --use-pnp
 
 ### import
 ```javascript
-import { ajax , arr_last } from 'usefuljs'
+import { ajax , arr_last } from 'usefuljs' // react
+
+import { ajax } from "usefuljs/useful.modern.js" // svelte
+
+
+// install node fetch first on nodejs
+global.fetch = require("node-fetch") // if using node.js
+const { ajax } = require("usefuljs") // node.js
 ```
 
 
