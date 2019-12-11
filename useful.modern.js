@@ -317,7 +317,7 @@ const isNum = value => /^\d+$/.test(value);
  */
 const ajax = async({method='GET',url=null,data=null,signal=null,headers={}, cors=null , formdata=null, fetcher=null }) =>{
     try{
-        fetch = fetcher || fetch;
+        if(!fetcher)fetcher = fetch;
 		method = method.toUpperCase();
         const reqBody = {
             method: method.toUpperCase()
@@ -360,14 +360,13 @@ const ajax = async({method='GET',url=null,data=null,signal=null,headers={}, cors
         if(signal){
             reqBody.signal = signal
         }
-        const res = await fetch(url,reqBody);
+        const res = await fetcher(url,reqBody);
     
         const content = await res.json();
         return content;
     }catch(err){console.log(err);throw err}
     
 }
-
 
 
 
