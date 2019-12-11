@@ -315,8 +315,9 @@ const isNum = value => /^\d+$/.test(value);
  * @param {boolean arguments.cors enable CORS (default is unset)
  * @param {Object} arguments.formdata Form data (default is null)
  */
-const ajax = async({method='GET',url=null,data=null,signal=null,headers={}, cors=null , formdata=null}) =>{
+const ajax = async({method='GET',url=null,data=null,signal=null,headers={}, cors=null , formdata=null, fetcher=null }) =>{
     try{
+        fetch = fetcher || fetch;
 		method = method.toUpperCase();
         const reqBody = {
             method: method.toUpperCase()
@@ -366,6 +367,7 @@ const ajax = async({method='GET',url=null,data=null,signal=null,headers={}, cors
     }catch(err){console.log(err);throw err}
     
 }
+
 
 
 
