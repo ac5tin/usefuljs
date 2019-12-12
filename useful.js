@@ -812,3 +812,13 @@ const colourgen = ()=> {
 	return colour;
 
 };
+
+
+
+/** generate random integer from range
+  * @param { number } low
+  * @param { number } high\
+  * @return { number }
+  * source: {https://stackoverflow.com/questions/33609404/node-js-how-to-generate-random-numbers-in-specific-range-using-crypto-randomby}
+  */
+const intgen = (low,high)=> Math.floor(Math.random() * (high+1 - low) + low);

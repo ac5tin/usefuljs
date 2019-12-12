@@ -31,6 +31,7 @@ signal : AbortController().signal (optional)
 headers : additional headers in Object format (optional)
 cors : enable or disabled cors (boolean) (optional)
 formdata : form data object (optional),if set to true, data object is ignored
+fetcher : custom fetch (optional)
 ```
 ### get request
 ```javascript
@@ -63,6 +64,12 @@ ajax({url:'/api/test',signal});
 
 // -- when u want to abort the ajax requet --
 controller.abort();
+```
+
+
+### sapper preload fetch
+```javascript
+ajax({fetcher: this.fetch})
 ```
 
 
@@ -315,4 +322,11 @@ const escaped = escape_HTML(html);
 Generate random colour hexcode
 ```javascript
 const colour = colourgen();
+```
+
+
+## intgen
+Generate random number integer from range
+```javascript
+intgen(1,5); // returns a random number from 1 to 5
 ```
