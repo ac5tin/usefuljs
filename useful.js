@@ -359,7 +359,7 @@ const ajax = async({method='GET',url=null,data=null,signal=null,headers={}, cors
         if(signal){
             reqBody.signal = signal
         }
-        const res = await fetcher(url,reqBody);
+        const res = await fetcher(encodeURI(url),reqBody);
     
         const content = await res.json();
         return content;
