@@ -330,3 +330,10 @@ Generate random number integer from range
 ```javascript
 intgen(1,5); // returns a random number from 1 to 5
 ```
+
+
+## arrobj2objarr
+Converts array of object to object of arrays
+```javascript
+arrobj2objarr([{a:1,b:2,c:3},{a:5,b:2,c:9}]); // { a:[1,5] , b:[2,2] , c:[3,9] }
+```

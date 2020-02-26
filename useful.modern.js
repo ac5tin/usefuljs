@@ -673,11 +673,31 @@ const colourgen = ()=> {
   */
 const intgen = (low,high)=> Math.floor(Math.random() * (high+1 - low) + low);
 
+/** array of object to object or arrays
+ * @param { array } arrobj
+ * @return { object }
+ */
+const arrobj2objarr = arrobj =>{
+    const retme = {};
+    const columns = Object.keys(arrobj[0]);// assume all records have exactly the same object structure
+    for(let c of columns){
+        retme[c] = [];
+    }
+    for(let r of arrobj){
+        // r = record
+        for(let c of columns){
+            retme[c].push(r[c])
+        }
+    }
+    return retme;
+}
+
+
 module.exports = {
     removeA, arr_last, prepend, array_push, array_remove,
     replaceAll, getDistFromBottom, obj2arr, form_validate, validateEmail,
     isInt, ajax, time_in_minutes, arr_chunk, asyncForEach, obj_sort,
     arr_rm, uuidv4, shortuid, matching_array, obj_prop_rename, obj_filter,
     obj_key_filter, ucfirst, arr2Obj, sleep , f_arr , arr_rmi,escape_dq, 
-    formatBytes, diffObjs,escape_HTML,arr_dedup,isNum,colourgen,intgen
+    formatBytes, diffObjs,escape_HTML,arr_dedup,isNum,colourgen,intgen, arrobj2objarr
 }

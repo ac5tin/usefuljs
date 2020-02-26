@@ -822,3 +822,25 @@ const colourgen = ()=> {
   * source: {https://stackoverflow.com/questions/33609404/node-js-how-to-generate-random-numbers-in-specific-range-using-crypto-randomby}
   */
 const intgen = (low,high)=> Math.floor(Math.random() * (high+1 - low) + low);
+
+
+
+
+/** array of object to object or arrays
+ * @param { array } arrobj
+ * @return { object }
+ */
+const arrobj2objarr = arrobj =>{
+    const retme = {};
+    const columns = Object.keys(arrobj[0]);// assume all records have exactly the same object structure
+    for(let c of columns){
+        retme[c] = [];
+    }
+    for(let r of arrobj){
+        // r = record
+        for(let c of columns){
+            retme[c].push(r[c])
+        }
+    }
+    return retme;
+}
