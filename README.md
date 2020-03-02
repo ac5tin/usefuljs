@@ -337,3 +337,9 @@ Converts array of object to object of arrays
 ```javascript
 arrobj2objarr([{a:1,b:2,c:3},{a:5,b:2,c:9}]); // { a:[1,5] , b:[2,2] , c:[3,9] }
 ```
+
+## arrobj2obj
+Converts an array of object to a big object (user specify the column to be used as key)
+```javascript
+arrobj2obj([{a:1,b:2,c:3},{a:5,b:2,c:9}],"a"); // { 1: {a:1,b:2,c:3}, 5: {a:5,b:2,c:9} }
+```
