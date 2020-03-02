@@ -844,3 +844,18 @@ const arrobj2objarr = arrobj =>{
     }
     return retme;
 }
+
+
+/** array of object to a big object
+ * @param { array } arrobj
+ * @param { string } column
+ * @return { object }
+ */
+const arrobj2obj = (arrobj,column="") =>{
+    const retme = {};
+    for(let a of arrobj){
+        if(retme[a[column]])continue;
+        retme[a[column]] = {...a};
+    }
+    return retme;
+}

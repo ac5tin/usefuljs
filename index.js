@@ -786,6 +786,19 @@ const arrobj2objarr = arrobj =>{
     return retme;
 }
 
+/** array of object to a big object
+ * @param { array } arrobj
+ * @param { string } column
+ * @return { object }
+ */
+const arrobj2obj = (arrobj,column="") =>{
+    const retme = {};
+    for(let a of arrobj){
+        if(retme[a[column]])continue;
+        retme[a[column]] = {...a};
+    }
+    return retme;
+}
 
 module.exports = {
     removeA, arr_last, prepend, array_push, array_remove,
@@ -793,5 +806,6 @@ module.exports = {
     isInt, ajax, time_in_minutes, arr_chunk, asyncForEach, obj_sort,
     arr_rm, uuidv4, shortuid, matching_array, obj_prop_rename, obj_filter,
     obj_key_filter, ajaxhr, ucfirst, arr2Obj, sleep , f_arr , arr_rmi,escape_dq, 
-    formatBytes, diffObjs,escape_HTML,arr_dedup,isNum,colourgen,intgen, arrobj2objarr
+    formatBytes, diffObjs,escape_HTML,arr_dedup,isNum,colourgen,intgen, arrobj2objarr,
+    arrobj2obj
 }
