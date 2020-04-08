@@ -305,6 +305,7 @@ const isNum = value => /^\d+$/.test(value);
 
 
 
+
 /** ajax submit request using native fetch API 
  * @param {Object} arguments
  * @param {string} arguments.method GET or POST
@@ -312,10 +313,13 @@ const isNum = value => /^\d+$/.test(value);
  * @param {Object} arguments.data data
  * @param {Object} arguments.signal
  * @param {object} arguments.headers additional headers
- * @param {boolean arguments.cors enable CORS (default is unset)
+ * @param {boolean } arguments.cors enable CORS (default is unset)
  * @param {Object} arguments.formdata Form data (default is null)
- */
-const ajax = async({method='GET',url=null,data=null,signal=null,headers={}, cors=null , formdata=null, fetcher=null }) =>{
+ * @param {boolean} arguments.json auto json parse response
+ * @param { Fetch } arguments.fetcher fetch object
+ * @return {Promise}
+*/
+const ajax = async({method='GET',url=null,data=null,signal=null,headers={}, cors=null , formdata=null, fetcher=null, json=true }) =>{
     try{
         if(!fetcher)fetcher = fetch;
 		method = method.toUpperCase();
@@ -361,13 +365,13 @@ const ajax = async({method='GET',url=null,data=null,signal=null,headers={}, cors
             reqBody.signal = signal
         }
         const res = await fetcher(encodeURI(url),reqBody);
-    
-        const content = await res.json();
+
+        let content = res;
+        if(json)content = await res.json();
         return content;
     }catch(err){console.log(err);throw err}
     
 }
-
 
 
 
