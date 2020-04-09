@@ -32,7 +32,8 @@ headers : additional headers in Object format (optional)
 cors : enable or disabled cors (boolean) (optional)
 formdata : form data object (optional),if set to true, data object is ignored
 fetcher : custom fetch (optional)
-json : parse response as json (option), by default set to true
+json : parse response as json (optional), by default set to true
+jsonbody : auto json stringify body before sending (optional), by default set to true
 ```
 ### get request
 ```javascript

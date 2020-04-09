@@ -325,6 +325,7 @@ const numXt = value =>{
  * @param {Object} arguments.formdata Form data (default is null)
  * @param {boolean} arguments.json auto json parse response
  * @param { Fetch } arguments.fetcher fetch object
+ * @param { jsonbody } arguments.jsonbody auto json.stringify body (default is true)
  * @return {Promise}
 */
 const ajax = async({method='GET',url=null,data=null,signal=null,headers={}, cors=null , formdata=null, fetcher=null, jsonbody=true , json=true }) =>{
