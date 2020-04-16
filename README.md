@@ -304,6 +304,14 @@ f_arr(['a',NaN,22,null]); // returns ["a", 22]
 ```
 
 
+## f_obj
+Filter out null / undefined in object
+```javascript
+k = {x:243,y:323421,uuu:null}
+f_obj(k) // returns  {x: 243, y: 323421}
+```
+
+
 
 ## escape_dq
 Escape Double Quotes

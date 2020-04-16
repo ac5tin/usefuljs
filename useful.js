@@ -870,3 +870,13 @@ const arrobj2obj = (arrobj,column="") =>{
     }
     return retme;
 }
+
+
+/** filter out null and undefined values from object
+ * @param { object } obj
+ * @returns { object }
+ * source : {https://stackoverflow.com/a/57625661}
+ */
+const f_obj = obj => Object.entries(obj).reduce((a,[k,v]) => (v == null ? a : {...a, [k]:v}), {});
+
+

@@ -713,6 +713,14 @@ const arrobj2obj = (arrobj,column="") =>{
     return retme;
 }
 
+/** filter out null and undefined values from object
+ * @param { object } obj
+ * @returns { object }
+ * source : {https://stackoverflow.com/a/57625661}
+ */
+const f_obj = obj => Object.entries(obj).reduce((a,[k,v]) => (v == null ? a : {...a, [k]:v}), {});
+
+
 
 
 module.exports = {
@@ -722,5 +730,5 @@ module.exports = {
     arr_rm, uuidv4, shortuid, matching_array, obj_prop_rename, obj_filter,
     obj_key_filter, ucfirst, arr2Obj, sleep , f_arr , arr_rmi,escape_dq, 
     formatBytes, diffObjs,escape_HTML,arr_dedup,isNum,colourgen,intgen, arrobj2objarr,
-    arrobj2obj
+    arrobj2obj,f_obj
 }
