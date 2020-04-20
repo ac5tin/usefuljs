@@ -319,9 +319,10 @@ const isNum = value => /^\d+$/.test(value);
  * @param { Fetch } arguments.fetcher fetch object
  * @param { jsonbody } arguments.jsonbody auto json.stringify body (default is true)
  * @param { jsonheader } arguments.jsonheader auto add application/json to header (default is true)
+ * @param { encodeuri } arguments.encodeuri encode url before sending (default is true)
  * @return {Promise}
 */
-const ajax = async({method='GET',url=null,data=null,signal=null,headers={}, cors=null , formdata=null, fetcher=null, jsonbody=true, jsonheader=true , json=true }) =>{
+const ajax = async({method='GET',url=null,data=null,signal=null,headers={},encodeuri=true, cors=null , formdata=null, fetcher=null, jsonbody=true, jsonheader=true , json=true }) =>{
     try{
         if(!fetcher)fetcher = fetch;
 		method = method.toUpperCase();
@@ -369,7 +370,7 @@ const ajax = async({method='GET',url=null,data=null,signal=null,headers={}, cors
         if(signal){
             reqBody.signal = signal
         }
-        const res = await fetcher(encodeURI(url),reqBody);
+        const res = await fetcher((encodeuri ? encodeURI(url) : url),reqBody);
 
         let content = res;
         if(json)content = await res.json();
@@ -377,7 +378,6 @@ const ajax = async({method='GET',url=null,data=null,signal=null,headers={}, cors
     }catch(err){console.log(err);throw err}
     
 }
-
 
 
 
