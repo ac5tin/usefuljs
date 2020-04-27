@@ -817,6 +817,26 @@ const arrobj2obj = (arrobj,column="") =>{
     return retme;
 }
 
+
+/** string to hex
+ * @param { string } target string
+ * @return { string }
+ * source : {https://stackoverflow.com/a/21648161}
+ */
+const hexCode = y =>{
+    let hex;
+
+    let result = "";
+    for (let i=0; i<y.length; i++) {
+        hex = y.charCodeAt(i).toString(16);
+        result += ("000"+hex).slice(-4);
+    }
+
+    return result
+}
+
+
+
 module.exports = {
     removeA, arr_last, prepend, array_push, array_remove,
     replaceAll, getDistFromBottom, obj2arr, form_validate, validateEmail,
@@ -824,5 +844,5 @@ module.exports = {
     arr_rm, uuidv4, shortuid, matching_array, obj_prop_rename, obj_filter,
     obj_key_filter, ajaxhr, ucfirst, arr2Obj, sleep , f_arr , arr_rmi,escape_dq, 
     formatBytes, diffObjs,escape_HTML,arr_dedup,isNum,colourgen,intgen, arrobj2objarr,
-    arrobj2obj,f_obj
+    arrobj2obj,f_obj,hexCode
 }

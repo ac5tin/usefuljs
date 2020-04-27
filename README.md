@@ -353,3 +353,11 @@ Converts an array of object to a big object (user specify the column to be used 
 ```javascript
 arrobj2obj([{a:1,b:2,c:3},{a:5,b:2,c:9}],"a"); // { 1: {a:1,b:2,c:3}, 5: {a:5,b:2,c:9} }
 ```
+
+
+## hexCode
+Convert string to hex code
+```javascript
+hexCode("康健雜誌");
+// "5eb7506596dc8a8c"
+```

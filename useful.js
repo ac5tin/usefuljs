@@ -880,3 +880,22 @@ const arrobj2obj = (arrobj,column="") =>{
 const f_obj = obj => Object.entries(obj).reduce((a,[k,v]) => (v == null ? a : {...a, [k]:v}), {});
 
 
+
+/** string to hex
+ * @param { string } target string
+ * @return { string }
+ * source : {https://stackoverflow.com/a/21648161}
+ */
+const hexCode = y =>{
+    let hex;
+
+    let result = "";
+    for (let i=0; i<y.length; i++) {
+        hex = y.charCodeAt(i).toString(16);
+        result += ("000"+hex).slice(-4);
+    }
+
+    return result
+}
+
+
