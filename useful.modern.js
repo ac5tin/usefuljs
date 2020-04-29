@@ -305,7 +305,6 @@ const isNum = value => /^\d+$/.test(value);
 
 
 
-
 /** ajax submit request using native fetch API 
  * @param {Object} arguments
  * @param {string} arguments.method GET or POST
@@ -375,10 +374,9 @@ const ajax = async({method='GET',url=null,data=null,signal=null,headers={},encod
         let content = res;
         if(json)content = await res.json();
         return content;
-    }catch(err){console.log(err);throw err}
+    }catch(err){throw err}
     
 }
-
 
 
 /** string time to minutes in int format

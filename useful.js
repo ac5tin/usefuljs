@@ -375,10 +375,9 @@ const ajax = async({method='GET',url=null,data=null,signal=null,headers={},encod
         let content = res;
         if(json)content = await res.json();
         return content;
-    }catch(err){console.log(err);throw err}
+    }catch(err){throw err}
     
 }
-
 
 
 
