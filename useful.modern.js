@@ -739,6 +739,22 @@ const hexCode = y =>{
     return result
 }
 
+/** array of json to csv
+ * @param  { array } array of json
+ * @return { string }
+ */
+const toCSV = json => {
+    json = Object.values(json);
+    let csv = "";
+    let keys = (json[0] && Object.keys(json[0])) || [];
+    csv += keys.join(',') + '\n';
+    for (let line of json) {
+        csv += keys.map(key => line[key]).join(',') + '\n';
+    }
+    return csv;
+}
+
+
 
 
 module.exports = {
@@ -748,5 +764,5 @@ module.exports = {
     arr_rm, uuidv4, shortuid, matching_array, obj_prop_rename, obj_filter,
     obj_key_filter, ucfirst, arr2Obj, sleep , f_arr , arr_rmi,escape_dq, 
     formatBytes, diffObjs,escape_HTML,arr_dedup,isNum,colourgen,intgen, arrobj2objarr,
-    arrobj2obj,f_obj,hexCode
+    arrobj2obj,f_obj,hexCode,toCSV
 }

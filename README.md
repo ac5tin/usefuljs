@@ -361,3 +361,10 @@ Convert string to hex code
 hexCode("康健雜誌");
 // "5eb7506596dc8a8c"
 ```
+
+
+## toCSV
+Convert Array JSON to csv
+```javascript
+toCSV(arrJSON)
+```

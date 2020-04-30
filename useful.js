@@ -898,3 +898,20 @@ const hexCode = y =>{
 }
 
 
+/** array of json to csv
+ * @param  { array } array of json
+ * @return { string }
+ */
+const toCSV = json => {
+    json = Object.values(json);
+    let csv = "";
+    let keys = (json[0] && Object.keys(json[0])) || [];
+    csv += keys.join(',') + '\n';
+    for (let line of json) {
+        csv += keys.map(key => line[key]).join(',') + '\n';
+    }
+    return csv;
+}
+
+
+
