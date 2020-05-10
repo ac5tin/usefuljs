@@ -2,7 +2,8 @@
   "name": "usefuljs",
   "version": "0.1.4",
   "description": "useful js functions",
-  "main": "index.js",
+  "main": "index",
+  "typings":"index",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
