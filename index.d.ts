@@ -1,3 +1,44 @@
 declare module "usefuljs" {
-    export function ajax(any):Promise<any>
+    export function removeA(arr: Array<any>):Array<any>;
+    export function escape_dq(str:string):string;
+    export function escape_HTML(html_str:string):string;
+    export function diffObjs(v1:object,v2:object): Array<any>;
+    export function arr_last(arr: Array<any>): any;
+    export function prepend(value:any,array:Array<any>):Array<any>;
+    export function formatBytes(a:number,b:number): string;
+    export function array_push(arr:Array<any>, el:any): void;
+    export function array_remove(array:Array<any>, element:any): Array<any>;
+    export function arr_dedup(array:Array<any>):Array<any>;
+    export function replaceAll(str:string,find:string,replace:string):string;
+    export function getDistFromBottom(element:HTMLElement):void;
+    export function obj2arr(obj:object): Array<any>;
+    export function form_validate(value:string,type:string,min:number|null,max:number|null,length:number):boolean;
+    export function validateEmail(email:string):boolean;
+    export function isInt(value:number):boolean;
+    export function isNum(value:string):boolean;
+    export function time_in_minutes(time:string):number;
+    export function arr_chunk(arr:Array<any>,length:number):Array<Array<any>>;
+    export function asyncForEach(arr:Array<any>,callback:Function):void;
+    export function obj_sort(name:string,length:boolean,reverse:boolean):any;
+    export function arr_rm(arr:Array<any>,element:any,mutate:boolean|null):Array<any>|void;
+    export function arr_rmi(arr:Array<any>,index:number,mutate:boolean|null):Array<any> | void;
+    export function uuidv4():string;
+    export function unique_id():string;
+    export function shortuid():string;
+    export function matching_array(ar0:Array<any>,ar1:Array<any>):Array<any>;
+    export function obj_prop_rename(obj:object,oldName:string,newName:string):object;
+    export function obj_filter(obj:object,predicate:Function):object;
+    export function obj_key_filter(obj:object,predicate:Function):object;
+    export function ucfirst(text:string):string;
+    export function arr2Obj(arr:Array<any>,keyname:string):object;
+    export function sleep(milliseconds:number):Promise<any>;
+    export function f_arr(test_array:Array<any>):Array<any>;
+    export function f_obj(obj:object):object;
+    export function colourgen():string;
+    export function intgen(low:number,high:number):number;
+    export function arrobj2objarr(arrobj:Array<any>):object;
+    export function arrobj2obj(arrobj:Array<any>,column:string):object;
+    export function hexCode(y:string):string;
+    export function toCSV(json:Array<object>):string;
+    export function ajax(arg:object):Promise<any>;
 }
