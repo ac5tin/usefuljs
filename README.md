@@ -368,3 +368,9 @@ Convert Array JSON to csv
 ```javascript
 toCSV(arrJSON)
 ```
+
+## crc32
+Crc32 hashes a value
+```javascript
+crc32("abc")
+```

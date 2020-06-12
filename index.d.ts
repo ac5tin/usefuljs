@@ -41,4 +41,5 @@ declare module "usefuljs" {
     export function hexCode(y:string):string;
     export function toCSV(json:Array<object>):string;
     export function ajax(arg:object):Promise<any>;
+    export function crc32(arg:string):string;
 }
