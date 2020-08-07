@@ -1,4 +1,4 @@
-import { ajaxReq } from "./interface";
+import { ajaxReq } from "./interface.ts";
 
 class useful {
     static arr_dedupe = <T>(x:Array<T>):Array<T>=>{
