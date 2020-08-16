@@ -135,6 +135,20 @@ class useful {
         }
         return csv;
     }
+
+    static uniqDedupe = <T>(list:Array<T>,uid:string):Array<T>=>{
+        try{
+            const uidlist = new Set();
+            const retlist:Array<T> = [];
+            for(let l of list){
+                const x = (l as any)[uid];
+                if(uidlist.has(x))continue;
+                uidlist.add(x);
+                retlist.push(l)
+            }
+            return retlist;
+        }catch(err){throw err}
+    }
     
 }
 
