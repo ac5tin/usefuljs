@@ -783,6 +783,19 @@ const crc32 = v => {
     return ((crc ^ (-1)) >>> 0).toString(16);
 }
 
+/** equivalent of MySQL's substring_index
+ * @param { string } input value
+ * @param { string } delimiter
+ * @param { number } index
+ * @return {string}
+*/
+const substrI = (input="", delimiter="/", index=-1) =>{
+    const arr = input.split(delimiter);
+    arr.splice(index, arr.length - index);
+    return arr.join(delimiter);
+}
+
+
 module.exports = {
     removeA, arr_last, prepend, array_push, array_remove,
     replaceAll, getDistFromBottom, obj2arr, form_validate, validateEmail,
@@ -790,5 +803,5 @@ module.exports = {
     arr_rm, uuidv4, shortuid, matching_array, obj_prop_rename, obj_filter,
     obj_key_filter, ucfirst, arr2Obj, sleep , f_arr , arr_rmi,escape_dq, 
     formatBytes, diffObjs,escape_HTML,arr_dedup,isNum,colourgen,intgen, arrobj2objarr,
-    arrobj2obj,f_obj,hexCode,toCSV,crc32
+    arrobj2obj,f_obj,hexCode,toCSV,crc32,substrI
 }

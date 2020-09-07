@@ -149,6 +149,13 @@ class useful {
             return retlist;
         }catch(err){throw err}
     }
+
+    // equivalent of MySQL's substring_index
+    static substrI = (input:string, delimiter:string, index:number):string =>{
+        const arr = input.split(delimiter);
+        arr.splice(index, arr.length - index);
+        return arr.join(delimiter);
+    }
     
 }
 

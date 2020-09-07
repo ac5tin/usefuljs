@@ -42,4 +42,5 @@ declare module "usefuljs" {
     export function toCSV(json:Array<object>):string;
     export function ajax(arg:object):Promise<any>;
     export function crc32(arg:string):string;
+    export function substrI(input:string,delimiter:string,index:number):string;
 }

@@ -942,3 +942,15 @@ const crc32 = v => {
 
     return ((crc ^ (-1)) >>> 0).toString(16);
 }
+
+/** equivalent of MySQL's substring_index
+ * @param { string } input value
+ * @param { string } delimiter
+ * @param { number } index
+ * @return {string}
+*/
+const substrI = (input="", delimiter="/", index=-1) =>{
+    const arr = input.split(delimiter);
+    arr.splice(index, arr.length - index);
+    return arr.join(delimiter);
+}
