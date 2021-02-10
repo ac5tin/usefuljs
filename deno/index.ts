@@ -1,5 +1,4 @@
-import { ajaxReq } from "./interface";
-
+import { ajaxReq } from "./interface.ts";
 
 class useful {
     /** array dedupe 
@@ -11,7 +10,7 @@ class useful {
     }
 
     /** wrapper around the Fetch API */
-    static ajax = async<T>({method="GET" , url="",data=undefined,signal=undefined,headers={},encodeuri=true, cors=undefined , formdata=undefined, fetcher=undefined, jsonbody=true, jsonheader=true}:ajaxReq):Promise<T>=>{
+    static ajax = async<T>({method="GET" , url="",data=undefined,signal=undefined,headers={},encodeuri=true, cors=undefined , formdata=undefined, fetcher=undefined, jsonbody=true, jsonheader=true , json=true}:ajaxReq):Promise<T>=>{
         try{
             if(fetcher === undefined)fetcher = fetch;
             method = method.toUpperCase();
@@ -59,15 +58,11 @@ class useful {
             if(signal){
                 reqBody.signal = signal
             }
-            const res:Response = await fetcher((encodeuri ? encodeURI(url) : url),reqBody);
+            const res = await fetcher((encodeuri ? encodeURI(url) : url),reqBody);
     
-
-            try{
-                const content:T = await res.json();
-                return content;
-            }catch{
-                throw new Error(await res.text());
-            }
+            let content = res;
+            if(json)content = await res.json();
+            return content;
         }catch(err){throw err}
     }
 
@@ -136,7 +131,7 @@ class useful {
         let keys = (jv[0] && Object.keys(jv[0])) || [];
         csv += keys.join(",") + "\n";
         for(let line of jv){
-            csv += keys.map((key: string | number) => line[key]).join(",") + "\n";
+            csv += keys.map(key => line[key]).join(",") + "\n";
         }
         return csv;
     }
@@ -165,5 +160,3 @@ class useful {
 }
 
 export default useful;
-
-const x = useful.ajax<string>({url:"",method:"get",json:false})
