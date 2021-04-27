@@ -43,4 +43,5 @@ declare module "usefuljs" {
     export function ajax<T>(arg:object):Promise<T>;
     export function crc32(arg:string):string;
     export function substrI(input:string,delimiter:string,index:number):string;
+    export function PromiseFallback<T>(pms:(()=>Promise<T>)[],retry?:number):Promise<T>;
 }
