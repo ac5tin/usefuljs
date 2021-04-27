@@ -161,6 +161,38 @@ class useful {
         arr.splice(index, arr.length - index);
         return arr.join(delimiter);
     }
+
+    /** PromiseFallback - fallback + retry promises
+     * @param { Function[]} pms functions that return promises
+     * @param { number } retry number of retries
+     * @return { Promise<T> } promise<T>
+     * @example Helper.PromiseFallback([async()=> await c.fetch_data<T>(this.#input,"post_message")],3)
+    */ 
+    static PromiseFallback = async<T>(pms:(()=>Promise<T>)[],retry:number = 3):Promise<T>=>{
+        try{
+            if(pms.length === 0){throw new Error("Array length must be at least 1")};
+            for await(let pm of pms){
+                let errr:Error | undefined = undefined;
+                const res:T|undefined = await pm().catch((err:Error)=>{
+                    errr = err;
+                    return undefined;
+                });
+                if(errr !== undefined || res === undefined){
+                    continue;
+                }else {
+                    // success
+                    return res;
+                }
+            }
+            throw new Error("All Promises Failed, Nothing to return");
+        }catch(err){
+            if(retry === 0){
+                throw err;
+            }
+            console.log(`PromiseFallback failed, retrying [${retry} times left]`);//debug
+            return await useful.PromiseFallback(pms,retry - 1).catch(err=>{throw err});
+        }
+    }
     
 }
 

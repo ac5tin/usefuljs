@@ -795,6 +795,37 @@ const substrI = (input="", delimiter="/", index=-1) =>{
     return arr.join(delimiter);
 }
 
+/** PromiseFallback - fallback + retry promises
+ * @param { Function[]} pms functions that return promises
+ * @param { number } retry number of retries
+ * @return { Promise<T> } promise<T>
+ * @example Helper.PromiseFallback([async()=> await c.fetch_data<T>(this.#input,"post_message")],3)
+*/ 
+const PromiseFallback = async(pms = [],retry = 3)=>{
+    try{
+        if(pms.length === 0){throw new Error("Array length must be at least 1")};
+        for await(let pm of pms){
+            let errr = undefined;
+            const res = await pm().catch((err)=>{
+                errr = err;
+                return undefined;
+            });
+            if(errr !== undefined || res === undefined){
+                continue;
+            }else {
+                // success
+                return res;
+            }
+        }
+        throw new Error("All Promises Failed, Nothing to return");
+    }catch(err){
+        if(retry === 0){
+            throw err;
+        }
+        console.log(`PromiseFallback failed, retrying [${retry} times left]`);//debug
+        return await PromiseFallback(pms,retry - 1).catch(err=>{throw err});
+    }
+}
 
 module.exports = {
     removeA, arr_last, prepend, array_push, array_remove,
@@ -803,5 +834,5 @@ module.exports = {
     arr_rm, uuidv4, shortuid, matching_array, obj_prop_rename, obj_filter,
     obj_key_filter, ucfirst, arr2Obj, sleep , f_arr , arr_rmi,escape_dq, 
     formatBytes, diffObjs,escape_HTML,arr_dedup,isNum,colourgen,intgen, arrobj2objarr,
-    arrobj2obj,f_obj,hexCode,toCSV,crc32,substrI
+    arrobj2obj,f_obj,hexCode,toCSV,crc32,substrI,PromiseFallback
 }
