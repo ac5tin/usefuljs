@@ -827,6 +827,20 @@ const PromiseFallback = async(pms = [],retry = 3)=>{
     }
 }
 
+
+
+/** NDJSON parser
+ * @param { string } jsonString input string
+ * @return { any }
+ */
+ const ndjson_parse = (jsonString) => {
+    const type = typeof jsonString;
+    if (type !== 'string') throw new Error(`Input have to be string but got ${type}`);
+  
+    const jsonRows = jsonString.split(/\n|\n\r/).filter(Boolean);
+    return jsonRows.map(jsonStringRow => JSON.parse(jsonStringRow));
+};
+
 module.exports = {
     removeA, arr_last, prepend, array_push, array_remove,
     replaceAll, getDistFromBottom, obj2arr, form_validate, validateEmail,
@@ -834,5 +848,5 @@ module.exports = {
     arr_rm, uuidv4, shortuid, matching_array, obj_prop_rename, obj_filter,
     obj_key_filter, ucfirst, arr2Obj, sleep , f_arr , arr_rmi,escape_dq, 
     formatBytes, diffObjs,escape_HTML,arr_dedup,isNum,colourgen,intgen, arrobj2objarr,
-    arrobj2obj,f_obj,hexCode,toCSV,crc32,substrI,PromiseFallback
+    arrobj2obj,f_obj,hexCode,toCSV,crc32,substrI,PromiseFallback,ndjson_parse
 }

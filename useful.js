@@ -987,3 +987,16 @@ const PromiseFallback = async(pms = [],retry = 3)=>{
         return await PromiseFallback(pms,retry - 1).catch(err=>{throw err});
     }
 }
+
+
+/** NDJSON parser
+ * @param { string } jsonString input string
+ * @return { any }
+ */
+ const ndjson_parse = (jsonString) => {
+    const type = typeof jsonString;
+    if (type !== 'string') throw new Error(`Input have to be string but got ${type}`);
+  
+    const jsonRows = jsonString.split(/\n|\n\r/).filter(Boolean);
+    return jsonRows.map(jsonStringRow => JSON.parse(jsonStringRow));
+};
